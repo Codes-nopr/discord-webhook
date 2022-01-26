@@ -1,16 +1,16 @@
-// @ts-ignore: eee;
+// @ts-ignore: node-fetch types
 import fetch from "node-fetch";
 import DAPI from "./constants";
 
-export default async function deleteWebhook(
+export default async function fetchWebhooks(
     appToken: string,
     webhookID: string,
-    bot: boolean = true
+    webhookToken: string,
     ): Promise<any> {
-    return fetch(`${DAPI}/webhooks/${webhookID}`, {
-        method: "DELETE",
+    return fetch(`${DAPI}/webhooks/${webhookID}/${webhookToken}`, {
+        method: "GET",
         headers: {
-            Authorization: `${bot ? "Bot" : ""} ${appToken}`,
+            Authorization: `Bot ${appToken}`,
             "Content-Type": "application/json",
         },
     })
